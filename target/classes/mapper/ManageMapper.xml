@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mapper.ManageMapper">
+	<select id="pj_people" parameterType="string" resultType="dto.ManageDTO">
+		select * from pro_team where pro_id=#{pro_id} order by pt_level desc
+	</select>
+	
+	<select id="pj_content" parameterType="string" resultType="dto.ManageDTO">
+		select * from project where pro_id=#{pro_id}
+	</select>
+	
+	<update id="pj_content_upt" parameterType="dto.ManageDTO">
+		update project set
+		pro_name=#{pro_name}, pro_info=#{pro_info}, pro_start=#{pro_start}, pro_end=#{pro_end}
+		where pro_id=#{pro_id}		 
+	</update>
+	
+	<!-- <select id="pj_people_info" parameterType="" resultMap="">
+		select * from member mb 
+		where mem_id in(select mem_id from pro_team pt where mb.mem_id = pt.mem_id and pt.pro_id=#{pro_id})
+	</select> -->
+	
+	<update id="managerReset" parameterType="string">
+		update pro_team set pt_level=0 where pro_id=#{pro_id}
+	</update>
+	
+	<update id="managerChange" parameterType="dto.ManageDTO">
+		update pro_team set pt_level=1 where pro_id=#{pro_id} and id=#{id}
+	</update>
+	
+	<update id="manager" parameterType="dto.ManageDTO">
+		update project set pro_mgr=#{id} where pro_id=#{pro_id}
+	</update>
+	
+	<insert id="addMember" parameterType="dto.ManageDTO">
+		insert into pro_team values(#{pro_id}, #{id}, 0)
+	</insert>
+	
+	<select id="idcheck" parameterType="String" resultType="String">
+		select id from pro_team where pro_id=#{pro_id}
+	</select>
+	
+	<delete id="delMember" parameterType="dto.ManageDTO">
+		delete from pro_team where pro_id=#{pro_id} and id=#{id}
+	</delete>
+	
+	<insert id="timeDelMem" parameterType="dto.ManageDTO">
+		insert into timeline values(tl_id_seq.nextval,sysdate,'time_mem',#{pro_id},#{id},'time_remove',
+		(select name from member where id=#{id}))
+	</insert>
+	
+	<delete id="pjDel" parameterType="String">
+		delete from project where pro_id=#{pro_id}
+	</delete>
+	
+	<delete id="pjpeopleDel" parameterType="String">
+		delete from pro_team where pro_id=#{pro_id}
+	</delete>
+	
+	<select id="searchIdList" resultType="string" parameterType="string">
+		select id from member where id like #{id} || '%'
+	</select>
+	
+	<update id="setRend" parameterType="dto.ManageDTO">
+		update project set pro_rend=sysdate where pro_id=#{pro_id}
+	</update>
+	
+	<update id="setSchRend" parameterType="dto.ManageDTO">
+		update schedule set sch_rend = sysdate where pro_id = #{pro_id} and sch_rend is null
+	</update>
+	
+	<update id="setTdRend" parameterType="dto.ManageDTO">
+		update todo set t_rend = sysdate where sch_id in (select sch_id from schedule where pro_id = #{pro_id}) and t_rend is null
+	</update>
+	<delete id="isSchLeader" parameterType="dto.ManageDTO">
+	delete from schedule where sch_mgr=#{id} and pro_id=#{pro_id}
+	</delete>
+		
+</mapper>

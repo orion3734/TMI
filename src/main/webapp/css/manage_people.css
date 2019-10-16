@@ -1,0 +1,317 @@
+/* 수정창 틀 */
+#pj_set{
+	width: 700px;
+	height: 800px;
+	margin: auto;
+}
+
+/* 프로젝트 수정창 */
+.container{	
+	width: 650px;
+}
+
+/* 프로젝트  수정 input창 */
+.form-control{
+	width: 200px;
+}
+
+/* 프로젝트 이름수정 css */
+#pro_name{
+	width: 500px;
+}
+
+/* 프로젝트 정보 css */
+#pro_info{
+	width: 600px;
+	height: 300px;
+	word-break: break-all;
+}
+
+/* 프로젝트 수정버튼, 뒤로가기 버튼 */
+#backMain{
+	float: right;
+	margin-top: 30px;
+	margin-right: 50px;
+}
+
+#update,#back{
+	float: right;
+	margin-right: 20px;
+}
+
+
+/* 매니저 변경 틀 */
+#manager_form{
+	width: 550px;
+	height: 200px;
+	border: 2px solid orange;
+	border-top: 8px solid orange;
+	border-radius: 15px;
+	background-color: white;
+	text-align: center;
+	margin: auto;
+	margin-top: 5%;
+}
+
+/* 제목 css */
+h1{
+	height: 70px;
+	line-height: 70px;
+	text-align: center;
+}
+
+/* 멤버 추가, 제거 틀 */
+#member_set{
+	width: 600px;
+	border: 2px solid red;
+	border-top: 8px solid red;
+	border-radius: 20px;
+	margin: auto;
+	margin-top: 100px;
+	background-color: white;
+}
+
+/* 멤버 추가,제거 버튼 틀 */
+#addDel{
+	margin-top: 20px;
+	margin-right: 10px;
+	text-align: right;
+}
+
+/****************** 폼 디자인 ******************/
+#search-bar input[type=text] {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+#search-bar label{
+	display: block;
+}
+
+#search-bar input[type=button] {
+  width: 100%;
+  background-color: #4CAF50;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+#search-bar input[type=button]:hover {
+  background-color: #45a049;
+}
+
+/****************** 검색 디자인 ******************/
+.results {
+    position: absolute;
+    z-index: 99;
+    width: 80%;
+    max-height: 20em;
+    overflow-y: auto;
+    font-size: 13px;
+    list-style: none;
+    background: #fff;
+    border-radius: 3px;
+    box-shadow: 0 0 5px rgba(27,31,35,.3);
+}
+
+.search-item {
+    display: block;
+    padding: 5px;
+    overflow: hidden;
+    font-weight: 600;
+    text-decoration: none;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    cursor: pointer;
+}
+
+.search-item:hover{
+	background-color: #478aff;
+	color: white;
+}
+
+
+#manegerSet{
+	margin-top: 20px;
+	margin-right: 20px;
+	float: right;
+}
+
+#selectBox{
+	width: 400px; /* 원하는 너비설정 */ 
+	padding: .8em .5em; /* 여백으로 높이 설정 */ 
+	font-family: inherit; /* 폰트 상속 */
+	background: url("../resources/manageimage/down_arrow.png") no-repeat 95% 50%; /* 네이티브 화살표 대체 */ 
+	background-size: 30px 30px;
+	background-color: rgba(43,114,165,.29);	 
+	border-radius: 5px; 
+	border: 3px solid #f8d486; 
+    /* 네이티브 외형 감추기 */ 
+    -webkit-appearance: none;        
+    -moz-appearance: none; 
+    appearance: none; 
+}
+
+.button, #Abutton, .button-back{
+	-webkit-appearance: none;
+    font-size: 1rem;
+	line-height: 1.2;
+    display: inline-block;
+    padding: 10px 16px;
+    border-radius: 4px;
+    border: 2px solid #444857;
+    background: #444857;
+    color: white;
+    cursor: pointer;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    text-align: center;
+    font-weight: normal;
+    text-decoration: none;
+}
+
+.button:hover, #Abutton:hover, .button-back:hover{
+	-webkit-appearance: none;
+    font-size: 1rem;
+	line-height: 1.2;
+    display: inline-block;
+    padding: 10px 16px;
+    border-radius: 4px;
+    border: 2px solid black;
+    background: #b5b5b5;
+    color: white;
+    cursor: pointer;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    text-align: center;
+    font-weight: normal;
+    text-decoration: none;
+}
+
+/********************************** 멤버 체크박스 ************************************/
+.checks {
+	position: relative;
+	margin-left: 20px;
+	margin-bottom: 10px;
+}
+
+.checks:after{
+	content: "";
+ 	display: block;
+	width: 200px;
+	margin-top: 5px;
+	border-bottom: 1px solid #6cc0e5;
+}
+
+.checks input[type="checkbox"] {  /* 실제 체크박스는 화면에서 숨김 */
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip:rect(0,0,0,0);
+  border: 0
+}
+.checks input[type="checkbox"] + label {
+  display: inline-block;
+  position: relative;
+  cursor: pointer;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+}
+.checks input[type="checkbox"] + label:before {  /* 가짜 체크박스 */
+  content: ' ';
+  display: inline-block;
+  width: 21px;  /* 체크박스의 너비를 지정 */
+  height: 21px;  /* 체크박스의 높이를 지정 */
+  line-height: 21px; /* 세로정렬을 위해 높이값과 일치 */
+  margin: -2px 8px 0 0;
+  text-align: center; 
+  vertical-align: middle;
+  background: #fafafa;
+  border: 1px solid #cacece;
+  border-radius : 3px;
+  box-shadow: 0px 1px 2px rgba(0,0,0,0.05), inset 0px -15px 10px -12px rgba(0,0,0,0.05);
+}
+.checks input[type="checkbox"] + label:active:before,
+.checks input[type="checkbox"]:checked + label:active:before {
+  box-shadow: 0 1px 2px rgba(0,0,0,0.05), inset 0px 1px 3px rgba(0,0,0,0.1);
+}
+
+.checks input[type="checkbox"]:checked + label:before {  /* 체크박스를 체크했을때 */ 
+  content: '\2714';  /* 체크표시 유니코드 사용 */
+  color: #99a1a7;
+  text-shadow: 1px 1px #fff;
+  background: #e9ecee;
+  border-color: #adb8c0;
+  box-shadow: 0px 1px 2px rgba(0,0,0,0.05), inset 0px -15px 10px -12px rgba(0,0,0,0.05), inset 15px 10px -12px rgba(255,255,255,0.1);
+}
+
+.checks.small input[type="checkbox"] + label {
+  font-size: 12px;
+}
+
+.checks.small input[type="checkbox"] + label:before {
+  width: 17px;
+  height: 17px;
+  line-height: 17px;
+  font-size: 11px;
+}
+
+.checks.etrans input[type="checkbox"] + label {
+  padding-left: 30px;
+}
+.checks.etrans input[type="checkbox"] + label:before {
+  position: absolute;
+  left: 0;
+  top: 0;
+  margin-top: 0;
+  opacity: .6;
+  box-shadow: none;
+  border-color: #6cc0e5;
+  -webkit-transition: all .12s, border-color .08s;
+  transition: all .12s, border-color .08s;
+}
+
+.checks.etrans input[type="checkbox"]:disabled + label:before {
+	border-color: #b5b5b5;
+}
+
+.checks.etrans input[type="checkbox"]:checked + label:before {
+  position: absolute;
+  content: "";
+  width: 10px;
+  top: -5px;
+  left: 5px;
+  border-radius: 0;
+  opacity:1; 
+  background: transparent;
+  border-color:transparent #6cc0e5 #6cc0e5 transparent;
+  border-top-color:transparent;
+  border-left-color:transparent;
+  -ms-transform:rotate(45deg);
+  -webkit-transform:rotate(45deg);
+  transform:rotate(45deg);
+}
+
+.no-csstransforms .checks.etrans input[type="checkbox"]:checked + label:before {
+  /*content:"\2713";*/
+  content: "\2714";
+  top: 0;
+  left: 0;
+  width: 21px;
+  line-height: 21px;
+  color: #6cc0e5;
+  text-align: center;
+  border: 1px solid #6cc0e5;
+}

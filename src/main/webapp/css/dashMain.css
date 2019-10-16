@@ -1,0 +1,192 @@
+@charset "UTF-8";
+
+
+
+.panel {
+  box-shadow: 0 2px 0 rgba(0,0,0,0.05);
+  border-radius: 0;
+  border: 0;
+  margin-bottom: 24px;
+}
+
+.panel-dark.panel-colorful {
+  background-color: #3b4146;
+  border-color: #3b4146;
+  color: #fff;
+}
+
+.panel-danger.panel-colorful {
+  background-color: #f76c51;
+  border-color: #f76c51;
+  color: #fff;
+}
+
+.panel-primary.panel-colorful {
+  background-color: #5fa2dd;
+  border-color: #5fa2dd;
+  color: #fff;
+}
+
+.panel-info.panel-colorful {
+  background-color: #4ebcda;
+  border-color: #4ebcda;
+  color: #fff;
+}
+
+.panel-body {
+  padding: 25px 20px;
+}
+
+.panel hr {
+  border-color: rgba(0,0,0,0.1);
+}
+
+.mar-btm {
+  margin-bottom: 15px;
+}
+
+h2, .h2 {
+  font-size: 28px;
+}
+
+.small, small {
+  font-size: 85%;
+}
+
+.text-sm {
+  font-size: .9em;
+}
+
+.text-thin {
+  font-weight: 300;
+}
+
+.text-semibold {
+  font-weight: 600;
+}
+
+
+
+/*틀 작업*/
+
+.grid_container {
+
+width: 93%;
+height: 100%;
+/* border: 1px solid black; */
+margin-left: 5%;
+margin-top: 10px;
+}
+
+.board_first {
+width: 98%;
+height: 20%;
+border: 1px solid black;
+margin-left: 12px;
+margin-top: 10px;
+}
+
+.board1 {
+   width: 24%;
+   height: 88%;
+   /* border: 1px solid black; */
+   margin-left: 12px;
+   margin-top: 10px;
+   float: left;
+}
+
+.board2 {
+   width: 24%;
+   height: 88%;
+   /* border: 1px solid black; */
+   margin-left: 12px;
+   margin-top: 10px;
+   float: left;
+}
+
+.board3 {
+   width: 24%;
+   height: 88%;
+   /* border: 1px solid black; */
+   margin-left: 12px;
+   margin-top: 10px;
+   float: left;
+}
+
+.board4 {
+   width: 24%;
+   height: 88%;
+   /* border: 1px solid black; */
+   margin-left: 12px;
+   margin-top: 10px;
+   float: left;
+}
+.board_second{
+width: 98%;
+height: 70%;
+/*  border: 1px solid black;  */
+margin-left: 12px;
+margin-top: 10px;
+
+}
+
+.board_chart1{
+width: 49%;
+height: 30%;
+border: 1px solid black;
+margin-left: 12px;
+margin-top: 1%;
+float: left;
+}
+
+.board_chart2{
+width: 49%;
+height: 30%;
+border: 1px solid black;
+margin-left: 19px;
+margin-top: 1%;
+float: left;
+}
+
+
+
+.board_chart3{
+width: 49%;
+height: 35.5%;
+border: 1px solid black;
+margin-left: 12px;
+margin-top: 1.5%;
+float: left;
+}
+
+
+.board_chart4{
+width: 49%;
+height: 35.5%;
+border: 1px solid black;
+margin-left: 12px;
+margin-top: 2%;
+float: left;
+}
+
+
+.board_chart5{
+width: 49%;
+height: 25%;
+border: 1px solid black;
+margin-left: 20.7px;
+margin-top: 1%;
+float: left;
+}
+
+
+.board_chart6{
+width: 49%;
+height: 52%;
+border: 1px solid black;
+margin-left: 19.5px;
+margin-top: 1%;
+float: right;
+}
+
+/*틀작업 end*/

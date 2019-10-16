@@ -1,0 +1,196 @@
+@charset "UTF-8";
+
+.schedules {
+width: 200px;
+    background: white;
+    border: 1px solid rgb(204, 204, 204);
+    float: left;
+    margin-right: 14px;
+    border-radius: 20px 20px 5px 5px;
+}
+
+.s_name{
+	text-align: center;
+    padding-top: 9px;
+    padding-bottom: 6px;
+    border-bottom: 1px solid rgb(193, 192, 192);
+    border-radius: 20px 20px 0px 0px;
+    font-family: 'Noto Sans KR', sans-serif;
+    font-weight: 100;
+    font-size: 20px;
+    color: white;
+    background-size:  170% !important;
+}
+
+#addSchedules {
+	width: 200px;
+	height: 200px;
+	background: white;
+	border: 1px solid rgb(204, 204, 204);
+	float: left;
+	border-radius: 4px;
+	text-align: center;
+	opacity: 0.7;
+}
+
+#addSchedules:hover {
+	opacity: 1;
+}
+
+#addScon {
+	margin-top: 34px;
+}
+
+#openSModal {
+    width: 80px;
+    height: 75px;
+    border-radius: 45px;
+    margin: 0 auto;
+    cursor: pointer;
+    padding-top: 5px;
+}
+
+.todo {
+	text-align: center;
+	padding: 15px;
+	border-bottom: 1px solid rgb(191, 190, 190);
+	font-family: 'Noto Sans KR', sans-serif;
+	font-weight: 100;
+	font-size: 24px;
+}
+
+.addTodo {
+	text-align: center;
+	padding: 30px;
+	border-bottom: 1px solid rgb(191, 190, 190);
+	opacity: 0.7;
+}
+
+.addTodo:hover {
+	opacity: 1;
+}
+
+#openTModal {
+    width: 80px;
+    height: 75px;
+    border-radius: 45px;
+    margin: 0 auto;
+    cursor: pointer;
+    padding-top: 5px;
+}
+
+.todo_name {
+	font-size: 21px;
+}
+
+.todo_when{
+	font-size: 16px;
+}
+
+#todo_start.todo_when{
+	font-weight: bolder;
+	color: green;
+}
+
+#todo_end.todo_when{
+	font-weight: bolder;
+	color: red;
+}
+
+#todo_over.todo_when{
+	font-weight: bold;
+    color: red;
+}
+.todo_day{
+	font-size: 55px;
+	margin-top: -6px;
+	font-family: 'Raleway', sans-serif;
+	display: inline-block;
+}
+
+.todo_mem {
+	margin-bottom: -6px;
+	margin-top: -4px;
+	font-size: 16px;
+	font-weight: 400;
+}
+
+.circle{
+	width: 70px;
+    height: 42px;
+    background: white;
+    border-radius: 51px;
+    margin-left: 5px;
+    padding-top: 28px;
+}
+
+.h{
+    width: 50px;
+    height: 10px;
+    margin: 0 auto;
+    border-radius: 5px;
+}
+
+.v{
+    width: 50px;
+    height: 10px;
+    margin: 0 auto;
+    transform: rotate(90deg);
+    margin-top: -9px;
+    border-radius: 5px;
+}
+
+/****************** 폼 디자인 ******************/
+.modal input[type=text] {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+.modal label{
+	display: block;
+}
+
+.start, .end{
+	width: 49% !important;
+}
+
+.modal input[type=submit] {
+  width: 100%;
+  background-color: #4CAF50;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.modal input[type=submit]:hover {
+  background-color: #45a049;
+}
+
+.team-list-item {
+    display: block;
+    padding: 5px;
+    overflow: hidden;
+    font-weight: 400;
+    text-decoration: none;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    cursor: pointer;
+    border-bottom: 1px solid #b7b7b785;
+}
+
+.team-list-item:hover{
+	background-color: #478aff;
+	color: white;
+}
+
+#schedules_wrap{
+	/* width:432px; */
+}

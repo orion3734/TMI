@@ -1,0 +1,290 @@
+@charset "UTF-8";
+
+* {
+	margin: 0;
+	padding: 0;
+}
+
+/*///////////////////////header전체 ///////////////////////*/
+#header {
+	width: 100%;
+	height: 54px;
+	border-bottom: 1px solid rgb(173, 173, 173);
+	position: relative;
+	z-index: 2;
+}
+
+/*///////////////////////header내용부분 ///////////////////////*/
+#header_content {
+	width: 1300px;
+	height: 55px;
+}
+
+/********************** 로그인 부분 START **********************/
+#header_log {
+	float: right;
+	margin-right: 70px;
+	margin-top: 9px;
+	height: 55px;
+}
+
+#header_log button, #header_log a {
+	font-family: 'Noto Sans KR', sans-serif;
+	opacity: 1;
+	cursor: pointer;
+	color: white;
+	background: rgba(0, 0, 0, 0);
+	height: 33px;
+	font-size: 15px;
+	font-weight: 100;
+	padding: 1px 14px;
+	float: left;
+}
+
+#header_log a svg {
+	width: 33px;
+	margin-bottom: -11px;
+}
+
+#header_sign_in_out:hover, #header_sign_up_mypage:hover {
+	opacity: 0.75;
+}
+
+#header_sign_in_out {
+	border: 1px solid white;
+	border-radius: 19px;
+}
+
+#header_sign_out {
+	border: 1px solid white;
+	border-radius: 19px;
+}
+
+#header_sign_up_mypage {
+	border: none;
+}
+
+.header_mypage {
+	font-size: 17px !important;
+	padding-right: 7px !important;
+}
+
+#header_notification {
+	background-image: url(/tmi/resources/common/notification.png) !important;
+	border: none;
+	background-size: 22px !important;
+	width: 25px;
+	height: 33px !important;
+	background-repeat: no-repeat !important;
+	background-position-y: 6px !important;
+	padding: 0 !important;
+	margin-right: 14px;
+}
+
+#header_notiCount {
+	width: 13px;
+	height: 18px;
+	background: #de1c1cfa;
+	float: left;
+	margin-left: -29px;
+	border-radius: 10px;
+	padding-left: 5px;
+	color: white;
+	border: 1px solid rgba(255, 255, 255, 0.51);
+	font-size: 12px;
+	cursor: pointer;
+}
+
+#header_notiNum {
+	width: 320px;
+	height: 400px;
+	display: none;
+	margin-left: -155px;
+	margin-top: 45px;
+	background: #ffffff;
+	box-sizing: border-box;
+	border: 1px solid #c7c7c77d;
+}
+
+.noti_ram01 {
+	font-family: 'Noto Sans KR', sans-serif;
+	font-size: 14px;
+	font-weight: 100;
+	padding: 9px;
+	border-bottom: 1px solid #cacaca;
+}
+
+#btn_yes {
+	border: none;
+	padding: 4px;
+	border-radius: 5px;
+	font-size: 12px;
+	font-family: 'Raleway', sans-serif;
+	font-weight: 400;
+	background: #1f8c46;
+	color: white;
+	margin-left: 140px;
+	cursor: pointer;
+}
+
+#btn_no {
+	border: none;
+	padding: 4px;
+	border-radius: 5px;
+	font-size: 12px;
+	font-family: 'Raleway', sans-serif;
+	font-weight: 400;
+	background: #dc3636;
+	color: white;
+	cursor: pointer;
+}
+
+#notification_deleteBtn {
+	float: right;
+	display: inline-block;
+	width: 20px;
+	height: 21px;
+	text-align: center;
+	border-radius: 5px;
+	cursor: pointer;
+}
+
+#notification_deleteBtn:hover {
+	background: #908c8c;
+	color: white;
+}
+/********************** 로그인 부분 END **********************/
+
+/*///////////////////////중앙 로고부분 ///////////////////////*/
+#header_logo {
+	font-size: 32px;
+	font-family: 'Dancing Script', cursive;
+	color: white;
+	font-weight: 700;
+	margin-top: 6px;
+	opacity: 0.9;
+	cursor: pointer;
+}
+
+/*////////////////////// Custom Select /////////////////////////*/
+.center {
+	display: inline-block;
+	width: 304px;
+}
+
+.custom-select-wrapper {
+	position: relative;
+	display: inline-block;
+	user-select: none;
+}
+
+.custom-select-wrapper select {
+	display: none;
+}
+
+.custom-select {
+	position: relative;
+	display: inline-block;
+	margin-top: 3px;
+	min-width: 300px;
+}
+
+.custom-select-trigger {
+	position: relative;
+	display: block;
+	padding: 0 84px 0 22px;
+	font-size: 16px;
+	font-weight: 300;
+	color: #fff;
+	line-height: 50px;
+	background: rgba(0, 0, 0, 0);
+	border-radius: 4px;
+	cursor: pointer;
+}
+
+.custom-select-trigger:after {
+	position: absolute;
+	display: block;
+	content: '';
+	width: 10px;
+	height: 10px;
+	top: 50%;
+	right: 25px;
+	margin-top: -3px;
+	border-bottom: 1px solid #fff;
+	border-right: 1px solid #fff;
+	transform: rotate(45deg) translateY(-50%);
+	transition: all .4s ease-in-out;
+	transform-origin: 50% 0;
+}
+
+.custom-select.opened .custom-select-trigger:after {
+	margin-top: 3px;
+	transform: rotate(-135deg) translateY(-50%);
+}
+
+.custom-options {
+	position: absolute;
+	display: block;
+	top: 100%;
+	left: 0;
+	right: 0;
+	min-width: 100%;
+	border: 1px solid #b5b5b5;
+	border-radius: 4px;
+	box-sizing: border-box;
+	box-shadow: 0 2px 1px rgba(0, 0, 0, .07);
+	background: #fff;
+	transition: all .4s ease-in-out;
+	opacity: 0;
+	visibility: hidden;
+	pointer-events: none;
+	transform: translateY(-15px);
+}
+
+.custom-select.opened .custom-options {
+	opacity: 1;
+	visibility: visible;
+	pointer-events: all;
+	transform: translateY(0);
+}
+/* .custom-options:before {
+      position: absolute;
+      display: block;
+      content: '';
+      bottom: 100%; right: 25px;
+      width: 7px; height: 7px;
+      margin-bottom: -4px;
+      border-top: 1px solid #b5b5b5;
+      border-left: 1px solid #b5b5b5;
+      background: #fff;
+      transform: rotate(45deg);
+      transition: all .4s ease-in-out;
+    } */
+.option-hover:before {
+	background: #f9f9f9;
+}
+
+.custom-option {
+	position: relative;
+	display: block;
+	padding: 0 22px;
+	color: #0e0e0e;
+	line-height: 47px;
+	cursor: pointer;
+	transition: all .4s ease-in-out;
+}
+
+.custom-option:first-of-type {
+	border-radius: 4px 4px 0 0;
+}
+
+.custom-option:last-of-type {
+	border-bottom: 0;
+	border-radius: 0 0 4px 4px;
+}
+
+.custom-option:hover, .custom-option.selection {
+	background: #f9f9f9;
+}
+/*////////////////////// Custom Select 끝 /////////////////////////*/

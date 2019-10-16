@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mapper.ProjectMapper">
+	<insert id="firstInsertProject" parameterType="dto.ProjectDTO">
+		insert into project (pro_id,pro_name,pro_info,pro_start,pro_end,pro_mgr) values (pro_id_seq.nextval,#{pro_name},#{pro_info},to_date(#{pro_start},'YY/MM/DD'),to_date(#{pro_end},'YY/MM/DD'),#{pro_mgr})
+	</insert>
+	
+	<insert id="firstInsertProTeam" parameterType="dto.Pro_TeamDTO">
+		insert into pro_team values (pro_id_seq.currval,#{id},#{pt_level})
+	</insert>
+	
+	<insert id="inviteProTeam" parameterType="dto.NotiDTO">
+		insert into notification values (noti_seq_no.nextval,#{id},pro_id_seq.currval,#{state},#{noti_id,jdbcType=VARCHAR})
+	</insert>
+	
+	<insert id="firstInsertSchedule" parameterType="dto.ScheduleDTO">
+		insert into schedule (sch_id,sch_name,sch_info,sch_start,sch_end,pro_id,sch_mgr) values (sch_id_seq.nextval,#{sch_name},#{sch_info},to_date(#{sch_start},'YY/MM/DD'),to_date(#{sch_end},'YY/MM/DD'),#{pro_id},#{sch_mgr})
+	</insert>
+	
+	<insert id="firstInsertSchTeam" parameterType="dto.Sch_TeamDTO">
+		insert into sch_team values (#{pro_id},#{id},#{st_level},sch_id_seq.currval)
+	</insert>
+	
+	<insert id="firstInsertTodo" parameterType="dto.TodoDTO">
+		insert into todo(t_id,t_start,t_end,t_name,sch_id,id) values (t_id_seq.nextval,to_date(#{t_start},'YY/MM/DD'),to_date(#{t_end},'YY/MM/DD'),#{t_name},#{sch_id},#{id})
+	</insert>
+	
+	<resultMap type="java.util.HashMap" id="proList">
+		<result javaType="string" column="pro_id" property="pro_id"/>
+		<result javaType="string" column="pro_name" property="pro_name"/>
+		<result javaType="string" column="pro_man" property="pro_man"/>
+		<result javaType="string" column="pro_dday" property="pro_dday"/>
+		<result javaType="string" column="pro_end" property="pro_end"/>
+	</resultMap>
+	<!-- select p.pro_id pro_id,pro_name, m.name pro_man, ceil(pro_end-sysdate) pro_dday, to_char(pro_end,'yyyy-MM-dd') pro_end from
+		(select * from pro_team where id =#{id}) pt, project p, member m, pro_team pt2
+		where p.pro_id = pt.pro_id and pt2.id = m.id and pt2.pro_id = p.pro_id and pt2.pt_level=1 -->
+	<select id="projectHomeList" resultMap="proList" parameterType="string">
+		select p.pro_id pro_id,pro_name, m.name pro_man, ceil(pro_end-sysdate) pro_dday, to_char(pro_end,'yyyy-MM-dd') pro_end
+		from project p, member m, pro_team pt
+		where p.pro_mgr = m.id and pt.pro_id=p.pro_id
+		and pt.id=#{id} and p.pro_rend is null order by p.pro_id desc
+	</select>
+	
+	<select id="proIdList" resultType="string" parameterType="string">
+		select pro_id from project where pro_id in (select pro_id from pro_team where id=#{id})
+	</select>
+	
+	<select id="searchIdList" resultType="string" parameterType="string">
+		select id from member where id like #{id} || '%'
+	</select>
+	
+	<select id="calendarPro" resultType="dto.ProjectDTO" parameterType="string">
+		select pro_name, pro_info, to_char(pro_start,'yyyy-MM-dd') pro_start, to_char(pro_end,'yyyy-MM-dd') pro_end, pro_rend from project where pro_id = #{pro_id}
+	</select>
+	
+	<select id="calendarSch" resultType="dto.ScheduleDTO" parameterType="string">
+		select sch_id, sch_info, sch_name, to_char(sch_start,'yyyy-MM-dd') sch_start, to_char(sch_end,'yyyy-MM-dd') sch_end, sch_rend from schedule where pro_id = #{pro_id} order by sch_start
+	</select>
+	
+	<select id="calendarTodo" resultType="dto.TodoDTO" parameterType="string">
+		select t_name, to_char(t_start,'yyyy-MM-dd') t_start, to_char(t_end,'yyyy-MM-dd') t_end, id, t_rend from todo where sch_id = #{sch_id} order by t_start
+	</select>
+	
+	<select id="proSelect" resultType="dto.ProjectDTO" parameterType="string">
+		select * from project where pro_id = #{pro_id}
+	</select>
+	<select id="schOne" resultType="dto.ScheduleDTO" parameterType="string">
+		select * from schedule where sch_id = #{sch_id}
+	</select>
+	
+	<select id="schSelect" resultType="dto.ScheduleDTO" parameterType="string">
+		select * from schedule where pro_id = #{pro_id} order by sch_id desc
+	</select> 
+	
+	<select id="tdSelect" resultType="dto.TodoDTO" parameterType="string">
+		select * from todo where sch_id = #{sch_id} order by t_id desc
+	</select>
+	
+	<select id="schSelectEnd" resultType="dto.ScheduleDTO" parameterType="string">
+		select * from schedule where pro_id = #{pro_id} and sch_rend is not null
+	</select> 
+	
+	<select id="tdSelectEnd" resultType="dto.TodoDTO" parameterType="string">
+		select * from todo where sch_id = #{sch_id} and t_rend is not null 
+	</select>
+	
+	<select id="tdViewSelect" resultType="dto.TodoDTO" parameterType="string">
+		select t_id, t_name, ceil(t_start-sysdate) t_start, ceil(t_end-sysdate) t_end, t.id id, t_rend, t_start start_date, t_end end_date, name from todo t, member m where t.id= m.id and sch_id = #{sch_id} order by t_priority
+	</select>
+	
+	<select id="proTeamSelect" resultType="dto.Pro_TeamDTO" parameterType="string">
+		select * from pro_team where pro_id = #{pro_id}
+	</select>
+	
+	<select id="schTeamSelect" resultType="dto.Sch_TeamDTO" parameterType="string">
+		select * from sch_team where pro_id = #{pro_id}
+	</select>
+	
+	<select id="schTeamSelectById" resultType="dto.Sch_TeamDTO" parameterType="string">
+		select pro_id, s.id, st_level, sch_id, profile_img, name  from sch_team s, member m where sch_id = #{sch_id} and m.id = s.id order by st_level desc
+	</select>
+	
+	<select id="getTdId" resultType="string" parameterType="string">
+		select id from todo where t_id = #{t_id}
+	</select>
+	
+	<select id="getTdSchId" resultType="string" parameterType="string">
+		select sch_id from todo where t_id = #{t_id}
+	</select>
+	
+	<select id="recentProId" resultType="string" parameterType="string">
+		select pro_id from timeline where pro_id in (select pt.pro_id from pro_team pt, project p where pt.pro_id = p.pro_id and id = #{id} and pro_rend is null ) and rownum = 1 order by tl_time desc
+	</select>
+	
+	<select id="isLeader" resultType="int" parameterType="string">
+		select pt_level from pro_team where id = #{id} and pro_id = #{pro_id}
+	</select>
+	
+	<select id="isSchLeader" resultType="string" parameterType="string">
+		select st_level from sch_team where id = #{id} and sch_id = #{sch_id}
+	</select>
+	
+	<select id="isSchEnd" resultType="string" parameterType="string">
+		select sch_id from schedule where sch_id = #{sch_id} and sch_rend is not null
+	</select>
+	
+	<select id="tdProidSelect" resultType="dto.TodoDTO" parameterType="string">
+		select * from todo where sch_id in (select sch_id from schedule where pro_id = #{pro_id}) order by t_rend
+	</select>
+	
+	<select id="tdProidSelectRend" resultType="dto.TodoDTO" parameterType="string">
+		select * from todo where sch_id in (select sch_id from schedule where pro_id = #{pro_id}) and t_rend is not null order by t_rend
+	</select>
+	
+	<select id="tdRendCompare" resultType="dto.TodoDTO" parameterType="string">
+		<![CDATA[
+		select * from todo where sch_id in 
+		(select sch_id from schedule where pro_id = #{pro_id}) and t_rend <= to_date(#{t_rend},'YYYY-MM-DD HH24:MI:SS') and t_rend is not null order by t_rend
+		]]> 
+	</select>
+	
+	<update id="uptSchRend" parameterType="string">
+		update schedule set sch_rend = sysdate where sch_id = #{sch_id}
+	</update>
+	
+	<update id="uptTdStart" parameterType="string">
+		update todo set t_start = sysdate where t_id = #{t_id}
+	</update>
+	
+	<update id="uptTdRend" parameterType="string">
+		update todo set t_rend = sysdate where t_id = #{t_id}
+	</update>
+	
+	<select id="cntTodo" resultType="int" parameterType="string">
+		select count(*) from todo where sch_id = #{sch_id} and id = #{id}
+	</select>
+	
+	<select id="cntEndTodo" resultType="int" parameterType="string">
+		select count(*) from todo where sch_id = #{sch_id} and id = #{id} and t_rend is not null 
+	</select>
+	
+	
+	<!--******************************타임라인 ******************************-->
+	<insert id="timeInsertTodo" parameterType="string">
+		insert into timeline values(tl_id_seq.nextval,sysdate,'time_todo',#{pro_id},t_id_seq.currval,'time_start',#{t_name})
+	</insert>
+	
+	<insert id="timeInsertSchedule" parameterType="string">
+		insert into timeline values(tl_id_seq.nextval,sysdate,'time_sch',#{pro_id},sch_id_seq.currval,'time_start',#{sch_name})
+	</insert>
+	
+	<insert id="timeendTodo" parameterType="string">
+		insert into timeline values(tl_id_seq.nextval,sysdate,'time_todo',#{pro_id},#{t_id},'time_end',
+		(select t_name from TODO where t_id=#{t_id}))
+	</insert>
+	
+		<insert id="timeendSchedule" parameterType="string">
+		insert into timeline values(tl_id_seq.nextval,sysdate,'time_sch',#{pro_id},#{sch_id},'time_end',
+		(select sch_name from schedule where sch_id=#{sch_id}))
+	</insert>
+	
+	
+		<!--******************************타임라인 ******************************-->
+	<select id="sequence_pro_id" resultType="String" parameterType="dto.ProjectDTO">
+	select pro_id from project where pro_mgr=#{pro_mgr} and pro_name=#{pro_name} 
+	</select>
+	
+	
+</mapper>
+

@@ -1,0 +1,146 @@
+@charset "UTF-8";
+
+#textArea h3, #textArea h1, #signUpSubmit, #info {
+	background: linear-gradient(-120deg, #12c2e9, #c471ed, #f64f59);
+}
+
+*:focus {
+	background: rgba(113, 191, 255, 0.1);
+	outline: none;
+}
+
+#bodywrap {
+	width: 100%;
+	height: 2000px;
+}
+
+#bodywrap div {
+	float: left;
+}
+
+/* signUpArea*/
+#signUpArea {
+	width: 100%;
+	height: 625px;
+	background: rgb(252, 252, 252)
+}
+
+#content {
+	width: 1020px;
+}
+
+/* textArea */
+#textArea {
+	color: white;
+	width: 520px;
+	margin-top: 130px;
+	font-family: 'Raleway', sans-serif;
+	margin-right: 70px;
+}
+
+#textArea h1 {
+	background-size: 75%;
+	font-size: 60px;
+	-webkit-background-clip: text;
+	-webkit-text-fill-color: transparent;
+}
+
+#textArea h3 {
+	font-size: 24px;
+	font-weight: 400;
+	-webkit-background-clip: text;
+	-webkit-text-fill-color: transparent;
+}
+
+#signForm {
+	padding-top: 15px;
+	margin-top: 60px;
+	width: 430px;
+	height: 467px;
+	background: rgb(245, 245, 240);
+	border-radius: 5px;
+	border: 1px solid rgba(5, 5, 5, 0.2);
+	box-sizing: border-box;
+}
+
+#signUpArea form label {
+	margin-top: 20px;
+	margin-bottom: 5px;
+	display: block;
+	color: black;
+	margin-left: 20px;
+	font-weight: 400;
+	font-size: 14px;
+	font-family: 'Noto Sans KR', sans-serif;
+}
+
+.signIn {
+	width: 380px;
+	height: 39px;
+	margin-bottom: 10px;
+	margin-left: 20px;
+	border: 1px solid rgb(219, 219, 219);
+	border-radius: 5px;
+	box-shadow: inset -1px 1px 8px 0px rgba(200, 200, 200, 0.5);
+	padding-left: 10px;
+	font-size: 20px;
+	color: #09405a;
+}
+
+.g-signin2{
+	float:right;
+}
+#signUpSubmit {
+	border: none;
+	border-radius: 2px;
+	color: white;
+	height: 64px;
+	width: 305px;
+	margin-left: 20px;
+	margin-right: 16px;
+	cursor: pointer;
+	font-size: 18px;
+	font-family: 'Noto Sans KR', sans-serif;
+	background-size: 200%;
+	margin-top: 15px;
+	transition: .6s;
+	font-weight: 100;
+}
+
+#signUpSubmit:hover {
+	background-position: right;
+}
+
+#SignUpGoogle {
+	width: 60px;
+	background-image: url("/ram/resources/Main_google_sign_in.png");
+	background-size: 46px;
+	background-repeat: no-repeat;
+	background-color: rgb(245, 245, 240);
+	color: rgba(0, 0, 0, 0);
+	cursor: pointer;
+	background-position-y: 5px
+}
+
+#signInfo {
+	margin-top: 20px;
+	font-size: 12px;
+	color: rgb(173, 173, 173);
+	width: 400px;
+	margin-left: 20px;
+}
+
+#youtube iframe {
+	top: 1450px;
+}
+
+#youtube {
+	width: 100%;
+	background: rgb(245, 245, 240);
+	height: 3000px;
+}
+
+#info {
+	width: 100%;
+	height: 290px;
+}

@@ -1,0 +1,137 @@
+@charset "UTF-8";
+
+
+/* 드래그불가 */
+.no-drag {
+	-ms-user-select: none;
+	-moz-user-select: -moz-none;
+	-webkit-user-select: none;
+	-khtml-user-select: none;
+	user-select: none;
+}
+
+/* 문서 전체 가운데정렬 */
+.center_box {
+	position: absolute;
+	left: 50%;
+	transform: translate(-50%, 0);
+}
+
+.gotoHome{
+	cursor:pointer;
+}
+/******************************* 전체 테마 *******************************/
+.tmi_skin1{
+	background: linear-gradient(120deg, #12c2e9, #c471ed, #f64f59);	
+}
+
+.tmi_skin2{
+	background: linear-gradient(120deg, #8360c3, #2ebf91);
+}
+
+.tmi_skin3{
+	    background: linear-gradient(120deg, #ed213a, #93291e);
+}
+
+.tmi_skin4{
+	background: linear-gradient(120deg, #0f2027, #203a43, #2c5364);
+}
+
+.tmi_skin5{
+	    background: linear-gradient(120deg, #c6ffdd, #fbd786, #f7797d);
+}
+
+.tmi_skin6{
+	   background: linear-gradient(120deg,#8933d4, #3800a9);
+}
+
+.tmi_skin7{
+	    background: linear-gradient(120deg, #4b6cb7, #182848);
+}
+
+.tmi_skin8{
+	    background: linear-gradient(120deg,  #606c88, #3f4c6b);
+}
+
+.tmi_skin9{
+	    background: linear-gradient(120deg,  #000000, #434343);
+}
+
+.tmi_skin10{
+	    background: linear-gradient(120deg, #ee9ca7, #ffdde1);
+}
+
+.tmi_skin11{
+	    background: #bb1b1b;
+}
+
+.tmi_skin12{
+	    background: #0b3e56;
+}
+
+.tmi_skin13{
+	    background: #30bb88;
+}
+
+.tmi_skin14{
+	    background: #3a62bd;
+}
+
+.tmi_skin15{
+	    background: #4dccc6;
+}
+
+.tmi_skin16{
+	    background: #58360b;
+}
+
+.tmi_skin17{
+	    background: #78a07d;
+}
+
+.tmi_skin18{
+	    background: #a74db7;
+}
+
+.tmi_skin19{
+	    background: #b74d83;
+}
+
+.tmi_skin20{
+	    background: #b74daf;
+}
+/******************************* 전체 테마 *******************************/
+
+/****************** ul 아이디 목록 디자인 ******************/
+.table-list {
+    display: table;
+    width: 100%;
+    color: #6a737d;
+    table-layout: fixed;
+    list-style: none;
+}
+
+.table-list-item {
+    position: relative;
+    display: table-row;
+    list-style: none;
+    border-bottom: 1px solid #eaecef;
+}
+
+.table-list-cell{
+	padding-top: 15px;
+    padding-bottom: 15px;
+    vertical-align: middle;
+    position: relative;
+    display: table-cell;
+    padding: 8px 10px;
+    font-size: 12px;
+    border-bottom: 1px solid #eaecef;
+}
+
+.table-list-cell#remove-item{
+	cursor: pointer;
+	font-weight: bold;
+	text-align: right;
+}
+/****************** 아이디 목록 디자인 ******************/

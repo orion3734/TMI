@@ -1,0 +1,173 @@
+/* 전체폼 */
+#allForm{
+	width: 1100px;
+	margin: auto;
+}
+
+/* 프로젝트 정보창 */
+.pj_contentForm{
+	width: 800px;
+	border: 3px solid black;
+	border-top: 10px solid black;
+	margin: auto;
+	margin-top: 8%;
+	background-color: white;
+	border-radius: 30px;
+	display: inline-block;
+}
+
+/* 프로젝트 제목, 멤버 제목 */
+.pj_name{
+	height: 100px;
+	font-size: 30px;
+	line-height: 100px;
+	text-align: center;
+	
+}
+
+/* 수정 버튼 */
+.pj_setting, .pj_people{
+	-webkit-appearance: none;
+    font-size: 1rem;
+	line-height: 1.2;
+    display: inline-block;
+    padding: 10px 16px;
+    border-radius: 4px;
+    border: 2px solid #444857;
+    background: #444857;
+    color: white;
+    cursor: pointer;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    text-align: center;
+    font-weight: normal;
+    text-decoration: none;
+    margin-bottom: 20px;
+}
+
+/* 수정 버튼 hover */
+.pj_setting:hover, .pj_people:hover{
+	-webkit-appearance: none;
+    font-size: 1rem;
+	line-height: 1.2;
+    display: inline-block;
+    padding: 10px 16px;
+    border-radius: 4px;
+    border: 2px solid black;
+    background: #b5b5b5;
+    color: white;
+    cursor: pointer;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    text-align: center;
+    font-weight: normal;
+    text-decoration: none;
+    margin-bottom: 20px;
+}
+
+/* 프로젝트 종료 */
+#SetRend{
+	-webkit-appearance: none;
+    font-size: 1rem;
+	line-height: 1.2;
+    display: inline-block;
+    padding: 10px 16px;
+    border-radius: 4px;
+    border: 2px solid #444857;
+    background: #444857;
+    color: white;
+    cursor: pointer;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    text-align: center;
+    font-weight: normal;
+    text-decoration: none;
+    margin-top: 20px;
+}
+
+/* 프로젝트 종료 hover */
+#SetRend:hover{
+	-webkit-appearance: none;
+    font-size: 1rem;
+	line-height: 1.2;
+    display: inline-block;
+    padding: 10px 16px;
+    border-radius: 4px;
+    border: 2px solid black;
+    background: #FA5858;
+    color: white;
+    cursor: pointer;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    text-align: center;
+    font-weight: normal;
+    text-decoration: none;
+    margin-top: 20px;
+}
+
+/* 종료일 표시 */
+#rend_date{
+	width: 132px;
+	font-weight: normal;
+	border-radius: 4px;
+    border: 2px solid black;
+    margin-top: 20px;
+}
+
+/* 버튼바 */
+#buttonMenu{
+	width: 150px;
+	text-align: center;
+	float: left;
+	margin: 10% 20px 0 0;
+}
+
+/* 프로젝트 기간 */
+#infoMenu{
+	display: inline-block;
+	text-align: center;
+	margin-left: 10px;
+}
+
+/* 프로젝트 정보 */
+#pj_info {
+  background-color: lightgrey;
+  border: 7px solid #eaecef;
+  border-radius: 30px;
+  padding: 16px;
+  margin-right: 15px;
+  width: 440px;
+  float: right;
+}
+
+/* 멤버 정보창 */
+#memberlist{
+	margin: 0 10px 30px 10px;
+}
+
+
+/********** 테이블 css ************/
+#customers {
+  font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+#customers td, #customers th {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+#customers tr:nth-child(odd){background-color: #d0bdbd;}
+#customers tr:nth-child(even){background-color: #f2f2f2;}
+
+#customers tr:hover {background-color: #ddd;}
+
+#customers th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  background-color: #f3c370;
+  color: white;
+}
+

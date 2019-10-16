@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="mapper.DashBoardMapper">	
+	
+	
+	<select id="pjcnt" parameterType="string" resultType="int">
+		select count(*) from pro_team pt, project p where id=#{id} and p.pro_id = pt.pro_id and pro_rend is null 
+	</select>
+	
+	<select id="alltodocnt" parameterType="string" resultType="int">
+		select count(*) From schedule s 
+		where pro_id in
+		(select pt.pro_id from pro_team pt, project p where pt.pro_id = p.pro_id and pro_rend is null and id=#{id})
+	</select>
+
+	<select id="remaincnt" parameterType="string" resultType="int">
+		<![CDATA[
+		select count(*) From schedule where pro_id in(select pt.pro_id from pro_team pt, project p where pt.pro_id = p.pro_id and pro_rend is null and id=#{id})
+		and sch_end >= sysdate and sch_rend is null
+		]]>
+	</select>
+	
+	<select id="compcnt" parameterType="string" resultType="int">
+		select count(*) from schedule where sch_rend is not null and  pro_id in 
+		(select pt.pro_id from pro_team pt, project p where pt.pro_id = p.pro_id and pro_rend is null and id=#{id})
+	</select>
+	
+	
+	<resultMap type="dto.DashDTO" id="cntTop">
+		<result javaType="int" column="total" property="total"/>
+		<result javaType="string" column="id" property="id"/>
+	</resultMap>
+	<select id="toplist" parameterType="int" resultMap="cntTop">
+		select count(cid) total,c.pro_id,id from (
+		select count(a.id) as cid,a.t_id, a.id,pj.pro_id  from project pj, sch_team st,
+		(select sch_id,t_id,id,t_start,t_end,t_rend from todo
+		group by sch_id,t_id,id,t_start,t_end,t_rend ) a
+		where pj.pro_id = st.pro_id  and a.sch_id = st.sch_id  and pj.pro_id=#{pro_id}
+		group by a.t_id,a.id,pj.pro_id
+		order by a.t_id asc)c 
+		group by c.pro_id,c.id
+		order by total  desc
+	</select>
+	
+	
+	<resultMap type="dto.DashDTO" id="cntdonut">
+		<result javaType="int" column="donut_comp" property="donut_comp" />
+		<result javaType="int" column="donut_haveto" property="donut_haveto" />
+		<result javaType="int" column="donut_bfdead" property="donut_bfdead" />
+		<result javaType="int" column="donut_afdead" property="donut_afdead" />
+		<result javaType="string" column="id" property="id" />
+	</resultMap>
+	
+	<select id="donutgraph" parameterType="string" resultMap="cntdonut">
+	 <![CDATA[
+		select to_number(count(a.work)) donut_comp, 
+		to_number(count(a.work2))as donut_haveto, 
+		to_number(count(a.work3))as donut_bfdead, 
+		to_number(count(a.work4))as donut_afdead ,a.id from(
+		select id, t_start, t_end, t_rend,
+		case 
+		when t_rend is not null then 'a'
+		end as work,
+		
+		case
+		when t_rend is null and t_start > sysdate and t_end > sysdate then 'b' 
+		end as work2,
+		
+		case
+		when t_rend is null and t_start <= sysdate and sysdate <= t_end then 'c'
+		end as work3,
+		
+		case
+		when t_rend is null and t_end < sysdate then 'd'
+		
+		end as work4
+		
+		from todo t, schedule s, project p where id=#{id} and s.sch_id = t.sch_id and s.pro_id = p.pro_id and pro_rend is null
+		order by t_id desc)a
+		group by a.id
+		]]> 
+	</select>
+		
+	
+	<!--최근 일정 목록 -->
+	<resultMap type="dto.DashDTO" id="recList">
+		<result javaType="string" column="sch_name" property="sch_name" />
+		<result javaType="string" column="sch_start" property="sch_start" />
+		<result javaType="string" column="sch_end" property="sch_end" />
+		<!-- <result javaType="string" column="sch_id" property="sch_id" /> -->
+		<result javaType="string" column="id" property="id" />
+		<result javaType="string" column="name" property="name" />
+		<result javaType="string" column="pro_id" property="pro_id"/>
+	</resultMap>	
+	
+	<select id="recentlist" resultMap="recList" parameterType="int">
+		<!-- select * from schedule where pro_id =#{pro_id} order by SCH_START DESC -->
+		select sc.sch_name sch_name, mem.name name , to_char(sc.sch_start,'YY-MM-dd') sch_start, to_char(sc.sch_end,'YY-MM-dd') sch_end ,sc.pro_id pro_id
+		from schedule sc, sch_team st, member mem, project p
+		where sc.sch_id = st.sch_id and st.id=mem.id and p.pro_id = sc.pro_id and pro_rend is null and p.pro_id = #{pro_id} and st_level=1 order by sch_start desc
+	</select>
+	
+	<!-- 다가올 일정 목록  -->
+		<resultMap type="dto.DashDTO" id="comlist">
+		<result javaType="string" column="sch_name" property="sch_name" />
+		<result javaType="string" column="sch_start" property="sch_start" />
+		<result javaType="string" column="sch_end" property="sch_end" />
+		<result javaType="string" column="id" property="id" />
+		<result javaType="string" column="pro_id" property="pro_id"/>
+		</resultMap>
+		
+	<select id="comminglist" parameterType="string" resultMap="comlist">
+	<![CDATA[
+	select sc.sch_name sch_name, to_char(sc.sch_start,'YY-MM-dd') sch_start, to_char(sc.sch_end,'YY-MM-dd') sch_end,pt.pro_id
+        from schedule sc, pro_team pt, project p
+        where sysdate+3 >= sc.sch_start and sysdate < sc.sch_start and pt.PRO_ID = sc.PRO_ID and sc.pro_id = p.pro_id and pro_rend is null and sch_rend is null
+        and pt.ID=#{id}	
+		]]>
+	</select>
+	
+	<!--타임라인 일정 목록  -->
+	<resultMap type="dto.DashDTO" id="tList">
+		<result javaType="string" column="tl_id" property="tl_id" />
+		<result javaType="string" column="tl_type" property="tl_type" />
+		<result javaType="string" column="tl_info" property="tl_info" />
+		<result javaType="string" column="id" property="id" />
+		<result javaType="string" column="tl_content" property="tl_content" />
+			<result javaType="string" column="pro_id" property="pro_id"/>
+	</resultMap> 
+	<select id="timelist" parameterType="string" resultMap="tList">
+		select DISTINCT(tl.tl_id) tl_id,
+        decode(tl_type,'time_sch','스케쥴','time_todo','할일','time_mem','멤버','time_file','파일') tl_type,
+        decode(tl_info,'time_start','생성','time_end','종료','time_add','가입','time_remove','탈퇴','time_up','업로드') tl_info,
+        td.id id,tl.tl_content tl_content ,sc.pro_id pro_id
+        from timeline tl, schedule sc,todo td , project p
+		where tl.pro_id = sc.pro_id and sc.sch_id = td.sch_id  and td.id=#{id} and p.pro_id = sc.pro_id and pro_rend is null order by tl.tl_id desc
+	</select>
+	
+	<update id="bgChange" parameterType="dto.DashDTO">
+		update member set bg_img=#{bgsel} where id=#{id}
+	</update>
+	
+	<select id="bgView" parameterType="string" resultType="string">
+		select bg_img from member where id=#{id}
+	</select>
+	
+	<!-- 그래프 추출 -->
+	<resultMap type="dto.DashDTO" id="gp">
+		<result javaType="int" column="wk1" property="wk1"/>
+		<result javaType="int" column="wk2" property="wk2"/>
+		<result javaType="int" column="wk3" property="wk3"/>
+		<result javaType="int" column="wk4" property="wk4"/>
+	<!-- 	<result javaType="int" column="pid" property="pid"/> -->
+	</resultMap>
+	<select id="graphlist" parameterType="java.util.HashMap" resultMap="gp">
+		<![CDATA[
+		select sum(b.week1) as wk1 ,sum(b.week2) as wk2 ,sum(b.week3) as wk3,sum(b.week4) as wk4 from(
+		select  count(a.a) week1 , count(a.b) week2, count(a.c) week3, count(a.d) week4 from
+		(select  td.t_rend,
+		case
+		when t_rend >= sysdate-7 then '1주전완료'
+		end as a,
+		case
+		when t_rend >= sysdate-14 then '2주전완료'
+		end as b,
+		case
+		when t_rend >= sysdate-21 then '3주전완료'
+		end as c,
+		case
+		when t_rend >= sysdate-28 then '4주전완료'
+		end as d
+		from todo td, schedule sc where td.sch_id = sc.sch_id 
+		and pro_id=#{pro_id} and id=#{id}
+		group by  td.t_rend
+		)a
+		group by a.a,a.b,a.c,a.d,a.t_rend
+		)b
+        order by b.week1 desc
+		]]> 
+	</select>
+	
+	
+</mapper>

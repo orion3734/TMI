@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mapper.UserMapper">
+
+<!-- 회원가입 -->
+<insert id="insertMethod" parameterType="dto.UserDTO">
+insert into member(id,pwd,name,ip,grade,uuid) values(#{id,jdbcType=VARCHAR},#{pwd,jdbcType=VARCHAR},#{name,jdbcType=VARCHAR},#{ip,jdbcType=VARCHAR},0,#{uuid,jdbcType=VARCHAR})
+</insert>
+<!-- mypage 비밀변호 변경 -->
+<update id="mypage_update_pwd" parameterType="dto.UserDTO">
+update member set pwd=#{pwd} where id=#{id}
+</update>
+
+<!-- 이메일인증위한 uuid grade확인 -->
+<select id="FindEmailMethod" parameterType="string" resultType="dto.UserDTO">
+select uuid,grade from member where id=#{id}
+</select>
+<!-- 이메일 인증  -->
+<update id="UpdateGrade" parameterType="string">
+update member set grade=1 where uuid=#{uuid}
+</update>
+
+<!-- 비밀번호변경  -->
+<update id="UpdatePwd" parameterType="dto.UserDTO">
+update member set pwd=#{pwd} where uuid=#{uuid}
+</update>
+<!-- uuid 새로운거로 변경 -->
+<update id="Updateuuid" parameterType="dto.UserDTO">
+update member set uuid=#{newuuid} where uuid=#{uuid}
+</update>
+
+<!--로그인  -->
+
+<select id="Select_id" parameterType="dto.UserDTO" resultType="dto.UserDTO">
+select * from member where id=#{id} and pwd=#{pwd} 
+</select>
+
+<!-- 아이디 중복검사  -->
+<select id="Test_id" parameterType="dto.UserDTO" resultType="int">
+select count(*) from member where id=#{id}
+</select>
+<!-- ip 검사 -->
+<select id="Select_ip" parameterType="String" resultType="String">
+select ip from member where id=#{id}
+</select>
+<!-- ip update -->
+<update id="Update_ip" parameterType="dto.UserDTO">
+update member set ip=concat(ip,#{ip}) where id=#{id}
+</update>
+
+<!-- email 중복검사 
+<select id="Test_email" parameterType="dto.UserDTO" resultType="int">
+select count(*) from member where email=#{email}
+</select> -->
+<!-- google 회원가입 -->
+<insert id="insert_google" parameterType="dto.UserDTO">
+insert into member(id,name) values (#{id},#{name})
+</insert>
+
+<update id="update_member" parameterType="dto.UserDTO">
+update member set profile_img=#{profile_img,jdbcType=VARCHAR},name=#{name},theme=#{theme} where id=#{id}
+</update>
+
+<select id="select_mypage" parameterType="string" resultType="dto.UserDTO">
+select * from member where id=#{id}
+</select>
+
+<select id="select_id_uuid" parameterType="string" resultType="string">
+select id from member where uuid=#{uuid}
+</select>
+<!-- user 알림  mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm -->
+
+<!-- 알림내용 보여주는거 -->
+<select id="select_notification" parameterType="string" resultType="dto.NotiDTO">
+select * from notification where id=#{id} and no=#{no}
+</select>
+<!-- 알림 개수 -->
+<select id="select_noti_count" parameterType="string" resultType="int">
+select count(*) from notification where id=#{id} and state in('0','3','4','6')
+</select>
+
+<!-- notification 보낸사람 이름 , 상태 등 가져오는거 -->
+<resultMap type="java.util.HashMap" id="notiList">
+      <result javaType="string" column="no" property="no"/>
+      <result javaType="string" column="state" property="state"/>
+      <result javaType="string" column="pro_id" property="pro_id"/>
+      <result javaType="string" column="pro_name" property="pro_name"/>
+      <result javaType="string" column="name" property="name"/>
+      <result javaType="string" column="id" property="id"/>
+   </resultMap>
+   <!--select n.no,n.state,p.pro_id,p.pro_name,m.name from project p, notification n, member m where p.pro_id = n.pro_id  and m.id = p.pro_mgr and n.id='jsmoon1130@naver.com' ; -->
+   <select id="notifi_list" resultMap="notiList" parameterType="string">
+     select n.no no,m.id id,n.state state,p.pro_id pro_id,p.pro_name pro_name,m.name name from project p, notification n, member m where p.pro_id = n.pro_id  and m.id = p.pro_mgr and n.id=#{id}
+   </select>
+   
+<!--pro_team에 insert  -->
+<insert id="pro_insert" parameterType="string">
+insert into pro_team values(#{pro_id},#{id},0)
+</insert>   
+
+<insert id="timeAddMem" parameterType="string">
+		insert into timeline values(tl_id_seq.nextval,sysdate,'time_mem',#{pro_id},#{id},'time_add',
+		(select name from member where id=#{id}))
+	</insert>
+
+
+<update id="noti_update" parameterType="string">
+update notification set state=#{state} where pro_id=#{pro_id} and id=#{id}
+</update>
+<update id="noti_read" parameterType="dto.NotiDTO">
+update notification set state=#{state} where pro_id=#{pro_id} and id=#{id} and noti_id=#{noti_id}
+</update>
+<insert id="noti_insert" parameterType="dto.NotiDTO">
+insert into notification values(noti_seq_no.nextval,#{id},#{pro_id},#{state},#{noti_id})
+</insert>   
+
+<!-- mypgae_프로젝트완료목록  -->
+<select id="mypage_project" parameterType="string" resultType="dto.ProjectDTO">
+select p.pro_id,  to_char(pro_rend,'yyyy-MM-dd') pro_rend, pro_name, pro_mgr, m.name from project p,pro_team pt, member m where p.pro_id=pt.pro_id and p.pro_mgr = m.id and pro_rend is not null and pt.id=#{id}
+</select>
+
+<delete id="project_delete" parameterType="string">
+delete from project where pro_id=#{pro_id}
+</delete>
+
+<delete id="pro_team_delete" parameterType="string">
+delete from pro_team where pro_id=#{pro_id}
+</delete>
+
+<delete id="pro_team_mydelete" parameterType="string">
+delete from pro_team where pro_id=#{pro_id} and id=#{id}
+
+</delete>
+</mapper>
